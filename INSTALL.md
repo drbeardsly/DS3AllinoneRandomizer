@@ -18,24 +18,66 @@ In the same directory that contains `DarkSoulsIII.exe`, do the
 following:
 - Copy `dinput8.dll` into the directory
 - Copy `modengine.ini` into the directory
+- Ensure that a `mod` folder exists in the directory. If it does not
+  exist, copy it over.  Note that it should currently be empty.
 
 ## Installing Item Randomizer (SoulsRandomizers/DS3Randomizer)
 
 In the same directory that contains `DarkSoulsIII.exe`, do the
 following:
-- Copy the `randomizer` directory into the directory
+- Ensure that the `randomizer` directory is in the same directory as
+  `DarkSoulsIII.exe`.  If it is not, copy it there from the zip file.
 
-## Installing the Enemy Randomizer (StraySouls)
+## Installing the Enemy Randomizer (DarkSouls3EnemyRandomizer)
 
 In the same directory that contains `DarkSoulsIII.exe`, do the
 following:
-- Copy the `mod` directory into the directory.  It should contain (oo2core_6_win64.dll, SoulsFormats.dll, StraySouls.exe).
+- Ensure that the `DarkSouls3EnemyRandomizer` directory exists.  If it
+  does not, copy it over from the zip file.
 
-## Run the Enemy Randomizer (StraySouls)
+## Run the Enemy Randomizer (DarkSouls3EnemyRandomizer)
 
-Make sure to run the enemy randomizer as the first mod that you run.  To do so,
-run `StraySouls.exe` from the `mod` directory.  Running StraySouls on its own
-will prompt for input.  The first time you run it, give the following input:
+Change directories into the `DarkSouls3EnemyRandomizer` directory from
+the `Game` folder where `DarkSoulsIII.exe` is located.
+
+-In this folder, run `pooremma.exe`.  Check both boxes for recommended
+settings, and press "Start Random". 
+    - This will create a new "map" folder.
+- Copy "map" "event" "script" "sfx" "Data0.bdt" into the '..\mod'
+  directory.  (The `mod` directory in the main folder that contains
+  `DarkSoulsIII.exe`.)
+    - Note that the "mod" directory already contains "event",
+      "script", "sfx", and Data0.bdt.  Its unclear if these need to
+      be copied over every time, but at least the map directory does
+      need to be copied.
+
+
+## Run the Item Randomizer (DS3Randomizer)
+
+Change directories into the `randomizer` directory.  Now run the
+`DS3Randomizer.exe` program.  Make sure to run this after the Enemy
+Randomizer.
+
+Note that the Enemy Randomizer requires that the "Merge mods from normal
+'mod' directory" setting must be selected!  After choosing the settings
+you would like, you can click the "Randomize new run!" button.  
+
+Note that running this randomizer will place a hints file in the `spoiler_logs` directory.
+
+
+## Note: Old Enemy randomizer (StraySouls)
+
+Note that there is a `StraySouls` folder in the distribution that none of the
+above instructions reference.  This directory contains an alternate DS3
+randomizer.  This can safely be ignored. However, it does have at least
+one interesting feature that can be possibly be layered on top of the
+other randomizer: "random -2" will go over the current maps and
+duplicate the enemies.  You do have to point it at "..\mod\map\mapstudio\" for it to randomize the right map files.
+
+At your own risk, the follow is a guide for using this feature: Run
+`StraySouls.exe` from the `mod` directory.  Running StraySouls on its
+own will prompt for input.  The first time you run it, give the
+following input:
 - "1"
 - "..\map\mapstudio\"
 - "backup"
@@ -48,19 +90,3 @@ Now, every time you would like to rerun the Enemy randomizer, Run `StraySouls.ex
 - "r"
 - "random -s"
 - Enter
-
-Note that you can change `random -s` to `random -s -2` if you would like to
-double the number of enemies.
-
-There are also `-m`, `-f`, `-o`, and `-a` options, but they are poorly
-documented, so it is unclear exactly what they do, and they may be incompatible
-with the Item Randomizer.  Its unclear exactly what is happening, but the `-m`
-and `-o` options lead to the game softlocking when used with the Item
-Randomizer (Gundyr is already aggro'd and the doors after him will not open).
-
-## Run the Item Randomizer (DS3Randomizer)
-
-Change directories into the `randomizer` directory.  Now run the `DS3Randomizer.exe` program.  After choosing the settings you would like, you can click the "Randomize new run!" button.  Make sure to run this after the Enemy Randomizer.
-
-Note that running this randomizer will place a hints file in the `spoiler_logs` directory.
-
