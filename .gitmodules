@@ -1,9 +1,0 @@
-[submodule "UXM"]
-	path = UXM
-	url = https://github.com/JKAnderson/UXM
-[submodule "SoulsFormats"]
-	path = SoulsFormats
-	url = https://github.com/JKAnderson/SoulsFormats.git
-[submodule "SoulsRandomizers"]
-	path = SoulsRandomizers
-	url = https://github.com/thefifthmatt/SoulsRandomizers.git
