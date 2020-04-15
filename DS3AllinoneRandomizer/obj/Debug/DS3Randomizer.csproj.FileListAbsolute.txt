@@ -1,0 +1,27 @@
+C:\Users\Xirdneth\Documents\Visual Studio 2019\Projects\DS3Randomizer\DS3Randomizer\bin\Debug\Zips\Enemy.zip
+C:\Users\Xirdneth\Documents\Visual Studio 2019\Projects\DS3Randomizer\DS3Randomizer\bin\Debug\Zips\Item.zip
+C:\Users\Xirdneth\Documents\Visual Studio 2019\Projects\DS3Randomizer\DS3Randomizer\bin\Debug\Zips\ModEngine.zip
+C:\Users\Xirdneth\Documents\Visual Studio 2019\Projects\DS3Randomizer\DS3Randomizer\bin\Debug\DS3Randomizer.exe.config
+C:\Users\Xirdneth\Documents\Visual Studio 2019\Projects\DS3Randomizer\DS3Randomizer\bin\Debug\DS3Randomizer.exe
+C:\Users\Xirdneth\Documents\Visual Studio 2019\Projects\DS3Randomizer\DS3Randomizer\bin\Debug\DS3Randomizer.pdb
+C:\Users\Xirdneth\Documents\Visual Studio 2019\Projects\DS3Randomizer\DS3Randomizer\obj\Debug\DS3Randomizer.Form1.resources
+C:\Users\Xirdneth\Documents\Visual Studio 2019\Projects\DS3Randomizer\DS3Randomizer\obj\Debug\DS3Randomizer.Properties.Resources.resources
+C:\Users\Xirdneth\Documents\Visual Studio 2019\Projects\DS3Randomizer\DS3Randomizer\obj\Debug\DS3Randomizer.csproj.GenerateResource.cache
+C:\Users\Xirdneth\Documents\Visual Studio 2019\Projects\DS3Randomizer\DS3Randomizer\obj\Debug\DS3Randomizer.csproj.CoreCompileInputs.cache
+C:\Users\Xirdneth\Documents\Visual Studio 2019\Projects\DS3Randomizer\DS3Randomizer\obj\Debug\DS3Randomizer.exe
+C:\Users\Xirdneth\Documents\Visual Studio 2019\Projects\DS3Randomizer\DS3Randomizer\obj\Debug\DS3Randomizer.pdb
+C:\Users\Xirdneth\Documents\Visual Studio 2019\Projects\DS3Randomizer\DS3Randomizer\obj\Debug\DS3Randomizer.csprojAssemblyReference.cache
+C:\Users\Xirdneth\Source\Repos\DS3AllinoneRandomizer\DS3Randomizer\bin\Debug\Zips\Enemy.zip
+C:\Users\Xirdneth\Source\Repos\DS3AllinoneRandomizer\DS3Randomizer\bin\Debug\Zips\Item.zip
+C:\Users\Xirdneth\Source\Repos\DS3AllinoneRandomizer\DS3Randomizer\bin\Debug\Zips\ModEngine.zip
+C:\Users\Xirdneth\Source\Repos\DS3AllinoneRandomizer\DS3Randomizer\bin\Debug\DS3Randomizer.exe.config
+C:\Users\Xirdneth\Source\Repos\DS3AllinoneRandomizer\DS3Randomizer\bin\Debug\DS3Randomizer.exe
+C:\Users\Xirdneth\Source\Repos\DS3AllinoneRandomizer\DS3Randomizer\bin\Debug\DS3Randomizer.pdb
+C:\Users\Xirdneth\Source\Repos\DS3AllinoneRandomizer\DS3Randomizer\obj\Debug\DS3Randomizer.csprojAssemblyReference.cache
+C:\Users\Xirdneth\Source\Repos\DS3AllinoneRandomizer\DS3Randomizer\obj\Debug\DS3Randomizer.Properties.Resources.resources
+C:\Users\Xirdneth\Source\Repos\DS3AllinoneRandomizer\DS3Randomizer\obj\Debug\DS3Randomizer.csproj.GenerateResource.cache
+C:\Users\Xirdneth\Source\Repos\DS3AllinoneRandomizer\DS3Randomizer\obj\Debug\DS3Randomizer.csproj.CoreCompileInputs.cache
+C:\Users\Xirdneth\Source\Repos\DS3AllinoneRandomizer\DS3Randomizer\obj\Debug\DS3Randomizer.exe
+C:\Users\Xirdneth\Source\Repos\DS3AllinoneRandomizer\DS3Randomizer\obj\Debug\DS3Randomizer.pdb
+C:\Users\Xirdneth\Source\Repos\DS3AllinoneRandomizer\DS3Randomizer\obj\Debug\DS3Randomizer.Credits.resources
+C:\Users\Xirdneth\Source\Repos\DS3AllinoneRandomizer\DS3Randomizer\obj\Debug\DS3Randomizer.Main.resources

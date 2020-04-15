@@ -1,0 +1,13 @@
+C:\Users\Xirdneth\Source\Repos\DS3AllinoneRandomizer\DS3Randomizer\bin\Debug\Zips\Enemy.zip
+C:\Users\Xirdneth\Source\Repos\DS3AllinoneRandomizer\DS3Randomizer\bin\Debug\Zips\Item.zip
+C:\Users\Xirdneth\Source\Repos\DS3AllinoneRandomizer\DS3Randomizer\bin\Debug\Zips\ModEngine.zip
+C:\Users\Xirdneth\Source\Repos\DS3AllinoneRandomizer\DS3Randomizer\bin\Debug\DS3AllinoneRandomizer.exe.config
+C:\Users\Xirdneth\Source\Repos\DS3AllinoneRandomizer\DS3Randomizer\bin\Debug\DS3AllinoneRandomizer.exe
+C:\Users\Xirdneth\Source\Repos\DS3AllinoneRandomizer\DS3Randomizer\bin\Debug\DS3AllinoneRandomizer.pdb
+C:\Users\Xirdneth\Source\Repos\DS3AllinoneRandomizer\DS3Randomizer\obj\Debug\DS3AllinoneRandomizer.Credits.resources
+C:\Users\Xirdneth\Source\Repos\DS3AllinoneRandomizer\DS3Randomizer\obj\Debug\DS3AllinoneRandomizer.Main.resources
+C:\Users\Xirdneth\Source\Repos\DS3AllinoneRandomizer\DS3Randomizer\obj\Debug\DS3AllinoneRandomizer.Properties.Resources.resources
+C:\Users\Xirdneth\Source\Repos\DS3AllinoneRandomizer\DS3Randomizer\obj\Debug\DS3AllinoneRandomizer.csproj.GenerateResource.cache
+C:\Users\Xirdneth\Source\Repos\DS3AllinoneRandomizer\DS3Randomizer\obj\Debug\DS3AllinoneRandomizer.csproj.CoreCompileInputs.cache
+C:\Users\Xirdneth\Source\Repos\DS3AllinoneRandomizer\DS3Randomizer\obj\Debug\DS3AllinoneRandomizer.exe
+C:\Users\Xirdneth\Source\Repos\DS3AllinoneRandomizer\DS3Randomizer\obj\Debug\DS3AllinoneRandomizer.pdb
