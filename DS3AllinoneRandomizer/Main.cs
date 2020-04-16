@@ -117,7 +117,7 @@ namespace DS3AllinoneRandomizer
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.CreateNoWindow = false;
             startInfo.UseShellExecute = false;
-            startInfo.FileName = extractPath + @".\DS3AllinoneRandomizer.exe";
+            startInfo.FileName = extractPath + @"\DS3Randomizer.exe";
             startInfo.WindowStyle = ProcessWindowStyle.Normal;
             startInfo.WorkingDirectory = extractPath;
 
@@ -250,7 +250,7 @@ namespace DS3AllinoneRandomizer
                 Properties.Settings.Default.LastSelectedFolder = this.FOLDER_PATH_DS3 + "\\" + "Game";
                 Properties.Settings.Default.Save();
             }
-
+            CheckModInstall();
         }
 
         private void UpdateStatusBarText(string text)

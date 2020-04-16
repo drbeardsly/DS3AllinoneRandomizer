@@ -117,7 +117,7 @@ namespace pooremma
 			base.Controls.Add(this.BossesChoice);
 			base.Controls.Add(this.NormalChoice);
 			base.Controls.Add(this.button1);
-			base.Icon = (System.Drawing.Icon)componentResourceManager.GetObject("$this.Icon");
+			//base.Icon = (System.Drawing.Icon)componentResourceManager.GetObject("$this.Icon");
 			base.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			base.Name = "Randomizer";
 			base.StartPosition = FormStartPosition.CenterScreen;
