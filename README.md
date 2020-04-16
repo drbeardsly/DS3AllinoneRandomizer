@@ -3,7 +3,7 @@ A repository for an All-in-one Randomizer for Dark Souls 3 (DS3).
 The current main release [is available for download
 here](DarkSouls3AllinOneRandomizer-v.0.3.zip).
 - If you are having difficulty finding the download link in github,
-  [this is a direct download link](https://github.com/drbeardsly/DS3AllinoneRandomizer/raw/master/DarkSouls3AllinOneRandomizer-v.0.3.zip)
+  [this is a direct download link](https://github.com/drbeardsly/DS3AllinoneRandomizer/raw/master/DarkSouls3AllinOneRandomizer-v.0.3.1.zip)
 
 
 # Credits:
