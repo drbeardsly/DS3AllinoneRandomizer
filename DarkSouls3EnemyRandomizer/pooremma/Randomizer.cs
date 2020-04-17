@@ -38,7 +38,7 @@ namespace pooremma
 			num = (!this.NormalChoice.Checked ? 0 : 1);
 			num1 = (!this.BossesChoice.Checked ? 0 : 1);
 			RandomizerForEnemy.Randomwriter(num, num1);
-			MessageBox.Show("Random Complete");
+			MessageBox.Show("Enemy Randomization Complete!");
 		}
 
 		protected override void Dispose(bool disposing)
@@ -66,7 +66,7 @@ namespace pooremma
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(167, 38);
 			this.button1.TabIndex = 0;
-			this.button1.Text = "Start Random";
+			this.button1.Text = "Run Randomizer";
 			this.button1.UseVisualStyleBackColor = true;
 			this.button1.Click += new EventHandler(this.Button1_Click);
 			this.NormalChoice.AutoSize = true;
@@ -77,7 +77,7 @@ namespace pooremma
 			this.NormalChoice.Name = "NormalChoice";
 			this.NormalChoice.Size = new System.Drawing.Size(437, 19);
 			this.NormalChoice.TabIndex = 1;
-			this.NormalChoice.Text = "Normal will be replaced with both Bosses and Normal";
+			this.NormalChoice.Text = "All regular enemeies can be bosses.";
 			this.NormalChoice.UseVisualStyleBackColor = true;
 			this.NormalChoice.CheckedChanged += new EventHandler(this.NormalChoice_CheckedChanged);
 			this.BossesChoice.AutoSize = true;
@@ -86,7 +86,7 @@ namespace pooremma
 			this.BossesChoice.Name = "BossesChoice";
 			this.BossesChoice.Size = new System.Drawing.Size(349, 19);
 			this.BossesChoice.TabIndex = 2;
-			this.BossesChoice.Text = "Bosses will be replaced with only Bosses";
+			this.BossesChoice.Text = "Bosses can only be replaced with other bosses.";
 			this.BossesChoice.UseVisualStyleBackColor = true;
 			this.BossesChoice.CheckedChanged += new EventHandler(this.BossesChoice_CheckedChanged);
 			this.label1.AutoSize = true;
@@ -94,13 +94,13 @@ namespace pooremma
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(495, 15);
 			this.label1.TabIndex = 3;
-			this.label1.Text = "If you cancel it,the Normal will be replaced with only Normal";
+			this.label1.Text = "If not checked, regular enemies will only be enemies.";
 			this.label2.AutoSize = true;
 			this.label2.Location = new Point(20, 528);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(559, 15);
 			this.label2.TabIndex = 4;
-			this.label2.Text = "If you cancel it ,Bosses will be replaced with both Bosses and Normal";
+			this.label2.Text = "If not checked, bosses can also be random enemies.";
 			this.pictureBox1.Location = new Point(0, 4);
 			this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
 			this.pictureBox1.Name = "pictureBox1";
