@@ -5,7 +5,8 @@ here](DarkSouls3AllinOneRandomizer-v.0.3.3.0.zip).
 - If you are having difficulty finding the download link in github,
   [this is a direct download link](https://github.com/drbeardsly/DS3AllinoneRandomizer/raw/master/DarkSouls3AllinOneRandomizer-v.0.3.3.0.zip)
 
- To capture the Tracker:
+## Item Tracker Setup (OBS)
+To capture the Tracker:
 1) Add a Browser source to OBS
 2) Check the Local File box
 3) Click on Browse and locate the DS3Tracker.html file
@@ -14,7 +15,8 @@ here](DarkSouls3AllinOneRandomizer-v.0.3.3.0.zip).
 
 To interact with the tracker:
 1) Right click the Browser source of the Tracker, and then click on Interact
-2) Move or resize the window accordingly to interact with the tracker
+   Use the window that shows up to interact with the tracker. It can be resized or moved wherever you want.
+
 
 # Credits:
 
