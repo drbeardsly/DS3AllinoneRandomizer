@@ -23,9 +23,8 @@ namespace pooremma
 		private TextBox bossBossChance;
 
 		private Label enemyBossChanceLabel;
-		private Label label1;
-		private Label bossBossChanceLabel;
-
+        private CheckBox easyWall;
+        private Label bossBossChanceLabel;
 
 		public Randomizer()
 		{
@@ -48,13 +47,15 @@ namespace pooremma
 		{
 			int num;
 			int num1;
+            int num2;
 			int enemyBoss;
 			int bossBoss;
 			num = (!this.NormalChoice.Checked ? 0 : 1);
 			num1 = (!this.BossesChoice.Checked ? 0 : 1);
-			enemyBoss = Int16.Parse(this.enemyBossChance.Text);
+            num2 = (!this.easyWall.Checked ? 0 : 1);
+            enemyBoss = Int16.Parse(this.enemyBossChance.Text);
 			bossBoss = Int16.Parse(this.bossBossChance.Text);
-			RandomizerForEnemy.Randomwriter(num, num1, enemyBoss, bossBoss);
+			RandomizerForEnemy.Randomwriter(num, num1, enemyBoss, bossBoss, num2);
 			MessageBox.Show("Enemy Randomization Complete!");
 		}
 
@@ -77,7 +78,7 @@ namespace pooremma
             this.enemyBossChanceLabel = new System.Windows.Forms.Label();
             this.bossBossChanceLabel = new System.Windows.Forms.Label();
             this.bossBossChance = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.easyWall = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -183,24 +184,26 @@ namespace pooremma
             this.bossBossChance.Text = "80";
             this.bossBossChance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // label1
+            // easyWall
             // 
-            this.label1.Font = new System.Drawing.Font("Georgia", 8F, System.Drawing.FontStyle.Bold);
-            this.label1.ForeColor = System.Drawing.Color.DarkGray;
-            this.label1.Location = new System.Drawing.Point(12, 244);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(229, 65);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Note: If you want to re-randomize your enemies, you only need to go to the title " +
-    "screen. Restarting the game is not necessary";
+            this.easyWall.AutoSize = true;
+            this.easyWall.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold);
+            this.easyWall.ForeColor = System.Drawing.Color.DarkGray;
+            this.easyWall.Location = new System.Drawing.Point(11, 251);
+            this.easyWall.Margin = new System.Windows.Forms.Padding(2);
+            this.easyWall.Name = "easyWall";
+            this.easyWall.Size = new System.Drawing.Size(407, 22);
+            this.easyWall.TabIndex = 10;
+            this.easyWall.Text = "Easy Cemetary of Ash";
+            this.easyWall.UseVisualStyleBackColor = true;
             // 
             // Randomizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(766, 318);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(766, 291);
+            this.Controls.Add(this.easyWall);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.BossesChoice);
             this.Controls.Add(this.NormalChoice);
@@ -234,7 +237,17 @@ namespace pooremma
 
 		private void Randomizer_Load(object sender, EventArgs e)
 		{
-			this.pictureBox1.Image = Image.FromFile("files\\picture\\ds3randobanner.png");
+            ToolTip toolTip1 = new ToolTip();
+            //
+            // ToolTip
+            //
+            toolTip1.AutoPopDelay = 5000;
+            toolTip1.InitialDelay = 1000;
+            toolTip1.ReshowDelay = 500;
+            // Force the ToolTip text to be displayed whether or not the form is active.
+            toolTip1.ShowAlways = true;
+            toolTip1.SetToolTip(this.easyWall, "Iudex Gundry becomes an easy boss/enemy and MOST enemies in cemetary of ash become easy (not all) [BETA]");
+            this.pictureBox1.Image = Image.FromFile("E:\\Program Files (x86)\\Steam\\steamapps\\common\\DARK SOULS III\\Game\\mod\\files\\picture\\ds3randobanner.png");
 		}
 	}
 }
