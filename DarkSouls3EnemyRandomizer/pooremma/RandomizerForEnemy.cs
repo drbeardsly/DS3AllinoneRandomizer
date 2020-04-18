@@ -33,12 +33,13 @@ namespace pooremma
 		{
 		}
 
-		public static void Randomwriter(int choiceA, int choiceB)
+		public static void Randomwriter(int choiceA, int choiceB, int enemyBossChance, int bossBossChance)
 		{
 			int num;
 			List<RandomizerForEnemy.EnemyData> enemyDatas = new List<RandomizerForEnemy.EnemyData>();
 			List<RandomizerForEnemy.EnemyData> enemyDatas1 = new List<RandomizerForEnemy.EnemyData>();
 			List<RandomizerForEnemy.EnemyData> enemyDatas2 = new List<RandomizerForEnemy.EnemyData>();
+			List<String> bossModelIds = new List<string>();
 			RandomizerForEnemy.EnemyData enemyDatum = null;
 			FileStream fileStream = new FileStream(RandomizerForEnemy.FILE_NAME[0], FileMode.Open, FileAccess.Read);
 			StreamReader streamReader = new StreamReader(fileStream);
@@ -118,7 +119,7 @@ namespace pooremma
 				int num1 = 0;
 				Random random = new Random();
 				List<RandomizerForEnemy.EnemyData> enemyDatas3 = new List<RandomizerForEnemy.EnemyData>();
-				if (choiceA != 0)
+				if (choiceA != 0) // if enemies can be bosses
 				{
 					int num2 = random.Next(0, enemyDatas1.Count);
 					enemyDatas3.Add(enemyDatas1[num2]);
@@ -136,11 +137,20 @@ namespace pooremma
 						enemyDatas3.Add(enemyDatas[num4]);
 					}
 				}
+
+				for (int b = 0; b < enemyDatas1.Count; b++)
+				{
+					bossModelIds.Add(enemyDatas1[b].ModelName);
+				}
+
+
 				for (int l = 0; l < enemies.Count; l++)
 				{
 					byte[] numArray = new byte[] { 82, 191, 1, 0, 0, 0, 0, 0 };
 					byte[] numArray1 = new byte[] { 83, 191, 1, 0, 0, 0, 0, 0 };
 					byte[] numArray2 = new byte[] { 84, 191, 1, 0, 0, 0, 0, 0 };
+
+
 					if ((enemies[l].ModelName == "c6331" || enemies[l].ModelName == "c6121" || enemies[l].ModelName == "c6120" || enemies[l].ModelName == "c2170" || enemies[l].ModelName == "c6310" || enemies[l].ModelName == "c0000" || enemies[l].ModelName == "c0100" || enemies[l].ModelName == "c1400" || enemies[l].ModelName == "c6210" || enemies[l].ModelName == "c2120" || enemies[l].ModelName == "c3190" || enemies[l].ModelName == "c1450" || enemies[l].ModelName == "c3200" || enemies[l].ModelName == "c3250" || enemies[l].ModelName == "c2160" ? false : enemies[l].ModelName != "c1000"))
 					{
 						if ((enemies[l].EventEntityID == 3100257 || enemies[l].EventEntityID == 3100252 || enemies[l].EventEntityID == 3100266 || enemies[l].EventEntityID == 3100261 || enemies[l].EventEntityID == 4500265 || enemies[l].EventEntityID == 4500264 || enemies[l].EventEntityID == 4500263 || enemies[l].EventEntityID / 100 == 35004 || enemies[l].EventEntityID / 100 == 35008 && enemies[l].EventEntityID != 3500800 || enemies[l].EventEntityID == 3300372 || enemies[l].EventEntityID == 3300373 || enemies[l].EventEntityID == 3000612 || enemies[l].EventEntityID == 3000610 || enemies[l].EventEntityID == 3010568 ? false : enemies[l].EventEntityID != 3010539))
@@ -167,101 +177,151 @@ namespace pooremma
 									}
 								}
 							}
-							int num7 = 0;
-							while (true)
+							//int num7 = 0;
+							//while (true)
+							//{
+							//	if (num7 >= (int)RandomizerForEnemy.LIST_BOSS.Length)
+							//	{
+							//		int num8 = random.Next(0, enemyDatas3.Count);
+							//		enemies[l].ModelName = enemyDatas3[num8].ModelName;
+							//		enemies[l].NPCParamID = enemyDatas3[num8].NPCParamID;
+							//		enemies[l].ThinkParamID = enemyDatas3[num8].ThinkParamID;
+							//		num1++;
+							//		break;
+							//	}
+							//	else if (enemies[l].Name != RandomizerForEnemy.LIST_BOSS[num7])
+							//	{
+							//		num7++;
+							//	}
+							//	else if (num7 < 9)
+							//	{
+							//		if (choiceB != 1)
+							//		{
+							//			num = random.Next(0, 386);
+							//			enemies[l].ModelName = enemyDatas2[num].ModelName;
+							//			enemies[l].NPCParamID = enemyDatas2[num].NPCParamID;
+							//			enemies[l].ThinkParamID = enemyDatas2[num].ThinkParamID;
+							//			break;
+							//		}
+							//		else
+							//		{
+							//			num = random.Next(0, 6);
+							//			while (true)
+							//			{
+							//				if (enemies[l].ModelName != enemyDatas1[num].ModelName)
+							//				{
+							//					break;
+							//				}
+							//				num = random.Next(0, 6);
+							//			}
+							//			enemies[l].ModelName = enemyDatas1[num].ModelName;
+							//			enemies[l].NPCParamID = enemyDatas1[num].NPCParamID;
+							//			enemies[l].ThinkParamID = enemyDatas1[num].ThinkParamID;
+							//			break;
+							//		}
+							//	}
+							//	else if ((num7 < 9 ? false : num7 < 22))
+							//	{
+							//		if (choiceB != 1)
+							//		{
+							//			num = random.Next(0, enemyDatas2.Count);
+							//			enemies[l].ModelName = enemyDatas2[num].ModelName;
+							//			enemies[l].NPCParamID = enemyDatas2[num].NPCParamID;
+							//			enemies[l].ThinkParamID = enemyDatas2[num].ThinkParamID;
+							//			break;
+							//		}
+							//		else
+							//		{
+							//			num = random.Next(0, 23);
+							//			while (true)
+							//			{
+							//				if (enemies[l].ModelName != enemyDatas1[num].ModelName)
+							//				{
+							//					break;
+							//				}
+							//				num = random.Next(0, 23);
+							//			}
+							//			enemies[l].ModelName = enemyDatas1[num].ModelName;
+							//			enemies[l].NPCParamID = enemyDatas1[num].NPCParamID;
+							//			enemies[l].ThinkParamID = enemyDatas1[num].ThinkParamID;
+							//			break;
+							//		}
+							//	}
+							//	else if (choiceB != 1)
+							//	{
+							//		num = random.Next(0, enemyDatas2.Count);
+							//		enemies[l].ModelName = enemyDatas2[num].ModelName;
+							//		enemies[l].NPCParamID = enemyDatas2[num].NPCParamID;
+							//		enemies[l].ThinkParamID = enemyDatas2[num].ThinkParamID;
+							//		break;
+							//	}
+							//	else
+							//	{
+							//		num = random.Next(0, enemyDatas1.Count);
+							//		while (true)
+							//		{
+							//			if (enemies[l].ModelName != enemyDatas1[num].ModelName)
+							//			{
+							//				break;
+							//			}
+							//			num = random.Next(0, enemyDatas1.Count);
+							//		}
+							//		enemies[l].ModelName = enemyDatas1[num].ModelName;
+							//		enemies[l].NPCParamID = enemyDatas1[num].NPCParamID;
+							//		enemies[l].ThinkParamID = enemyDatas1[num].ThinkParamID;
+							//		break;
+							//	}
+							//}
+
+
+							// if current enemy is a boss 
+							if (bossModelIds.Contains(enemies[l].ModelName))
 							{
-								if (num7 >= (int)RandomizerForEnemy.LIST_BOSS.Length)
+								// If bosses can only be bosses make enemy a random boss 
+								if (choiceB == 1)
 								{
-									int num8 = random.Next(0, enemyDatas3.Count);
-									enemies[l].ModelName = enemyDatas3[num8].ModelName;
-									enemies[l].NPCParamID = enemyDatas3[num8].NPCParamID;
-									enemies[l].ThinkParamID = enemyDatas3[num8].ThinkParamID;
-									num1++;
-									break;
+									int randomBossId = random.Next(0, enemyDatas1.Count);
+									enemies[l].ModelName = enemyDatas1[randomBossId].ModelName;
+									enemies[l].NPCParamID = enemyDatas1[randomBossId].NPCParamID;
+									enemies[l].ThinkParamID = enemyDatas1[randomBossId].ThinkParamID;
 								}
-								else if (enemies[l].Name != RandomizerForEnemy.LIST_BOSS[num7])
+								else // Make boss either an enemy or a boss (very low chance for a boss)
 								{
-									num7++;
-								}
-								else if (num7 < 9)
-								{
-									if (choiceB != 1)
+									if (random.Next(0, 100) < bossBossChance) // if enemy is randomly selected to be a boss
 									{
-										num = random.Next(0, 386);
-										enemies[l].ModelName = enemyDatas2[num].ModelName;
-										enemies[l].NPCParamID = enemyDatas2[num].NPCParamID;
-										enemies[l].ThinkParamID = enemyDatas2[num].ThinkParamID;
-										break;
+										int randomBossId = random.Next(0, enemyDatas1.Count);
+										enemies[l].ModelName = enemyDatas1[randomBossId].ModelName;
+										enemies[l].NPCParamID = enemyDatas1[randomBossId].NPCParamID;
+										enemies[l].ThinkParamID = enemyDatas1[randomBossId].ThinkParamID;
 									}
-									else
+									else // make current enemy any enemy
 									{
-										num = random.Next(0, 6);
-										while (true)
-										{
-											if (enemies[l].ModelName != enemyDatas1[num].ModelName)
-											{
-												break;
-											}
-											num = random.Next(0, 6);
-										}
-										enemies[l].ModelName = enemyDatas1[num].ModelName;
-										enemies[l].NPCParamID = enemyDatas1[num].NPCParamID;
-										enemies[l].ThinkParamID = enemyDatas1[num].ThinkParamID;
-										break;
+										int randomEnemyId = random.Next(0, enemyDatas2.Count);
+										enemies[l].ModelName = enemyDatas2[randomEnemyId].ModelName;
+										enemies[l].NPCParamID = enemyDatas2[randomEnemyId].NPCParamID;
+										enemies[l].ThinkParamID = enemyDatas2[randomEnemyId].ThinkParamID;
 									}
-								}
-								else if ((num7 < 9 ? false : num7 < 22))
-								{
-									if (choiceB != 1)
-									{
-										num = random.Next(0, enemyDatas2.Count);
-										enemies[l].ModelName = enemyDatas2[num].ModelName;
-										enemies[l].NPCParamID = enemyDatas2[num].NPCParamID;
-										enemies[l].ThinkParamID = enemyDatas2[num].ThinkParamID;
-										break;
-									}
-									else
-									{
-										num = random.Next(0, 23);
-										while (true)
-										{
-											if (enemies[l].ModelName != enemyDatas1[num].ModelName)
-											{
-												break;
-											}
-											num = random.Next(0, 23);
-										}
-										enemies[l].ModelName = enemyDatas1[num].ModelName;
-										enemies[l].NPCParamID = enemyDatas1[num].NPCParamID;
-										enemies[l].ThinkParamID = enemyDatas1[num].ThinkParamID;
-										break;
-									}
-								}
-								else if (choiceB != 1)
-								{
-									num = random.Next(0, enemyDatas2.Count);
-									enemies[l].ModelName = enemyDatas2[num].ModelName;
-									enemies[l].NPCParamID = enemyDatas2[num].NPCParamID;
-									enemies[l].ThinkParamID = enemyDatas2[num].ThinkParamID;
-									break;
-								}
-								else
-								{
-									num = random.Next(0, enemyDatas1.Count);
-									while (true)
-									{
-										if (enemies[l].ModelName != enemyDatas1[num].ModelName)
-										{
-											break;
-										}
-										num = random.Next(0, enemyDatas1.Count);
-									}
-									enemies[l].ModelName = enemyDatas1[num].ModelName;
-									enemies[l].NPCParamID = enemyDatas1[num].NPCParamID;
-									enemies[l].ThinkParamID = enemyDatas1[num].ThinkParamID;
-									break;
 								}
 							}
+							else // randomize all enemies and bosses based on random boss chance
+							{
+								if (random.Next(0, 100) < enemyBossChance && choiceA == 1) // if enemy is randomly selected to be a boss && enemies can be bosses
+								{
+									int randomBossId = random.Next(0, enemyDatas1.Count);
+									enemies[l].ModelName = enemyDatas1[randomBossId].ModelName;
+									enemies[l].NPCParamID = enemyDatas1[randomBossId].NPCParamID;
+									enemies[l].ThinkParamID = enemyDatas1[randomBossId].ThinkParamID;
+								}
+								else // make current enemy any enemy
+								{
+									int randomEnemyId = random.Next(0, enemyDatas2.Count);
+									enemies[l].ModelName = enemyDatas2[randomEnemyId].ModelName;
+									enemies[l].NPCParamID = enemyDatas2[randomEnemyId].NPCParamID;
+									enemies[l].ThinkParamID = enemyDatas2[randomEnemyId].ThinkParamID;
+								}
+							}
+
+
 							if (enemies[l].ModelName == "c5280")
 							{
 								EMEVD.Instruction instruction = new EMEVD.Instruction()
@@ -300,6 +360,8 @@ namespace pooremma
 							}
 						}
 					}
+				
+				
 				}
 				mSB3.Write(RandomizerForEnemy.LIST_FILE_RANDOM_WRITE[i]);
 				eMEVD.Write(RandomizerForEnemy.EVENT_WRITE[i]);
