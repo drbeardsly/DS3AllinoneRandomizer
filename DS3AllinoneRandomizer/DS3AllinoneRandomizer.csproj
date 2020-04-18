@@ -245,9 +245,6 @@
     <Content Include="DS3_Tracker\images\DS3 key items Chroma-05-01.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="DS3_Tracker\images\DS3_key_items_Chroma-05-01.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="DS3_Tracker\jquery.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
