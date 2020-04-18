@@ -23,7 +23,7 @@ namespace DS3AllinoneRandomizer
         public Main()
         {
             InitializeComponent();
-            toolStripLabel1.Text = $" Version: {Assembly.GetExecutingAssembly().GetName().Version}";
+            toolStripLabel1.Text = $" Version: {Assembly.GetExecutingAssembly().GetName().Version.Major}.{Assembly.GetExecutingAssembly().GetName().Version.Minor}.{Assembly.GetExecutingAssembly().GetName().Version.Build}";
 
             //Find and check DS3 Dir
             if (!string.IsNullOrEmpty(Properties.Settings.Default.LastSelectedFolder))
@@ -42,20 +42,28 @@ namespace DS3AllinoneRandomizer
 
         private void btn_ModEngineInstall_Click(object sender, EventArgs e)
         {
-            string zipPath = @".\Zips\ModEngine.zip";
-            string extractPath = this.FOLDER_PATH_DS3;
+            try
+            {
+                string zipPath = @".\Zips\ModEngine.zip";
+                string extractPath = this.FOLDER_PATH_DS3;
 
-            var files = Directory.EnumerateFiles(extractPath);
-            if (files.Contains(extractPath + "\\" + "dinput8.dll") && files.Contains(extractPath + "\\" + "modengine.ini"))
-            {
-                System.IO.File.Delete(this.FOLDER_PATH_DS3 + "\\" + "dinput8.dll");
-                System.IO.File.Delete(this.FOLDER_PATH_DS3 + "\\" + "modengine.ini");
+                var files = Directory.EnumerateFiles(extractPath);
+                if (files.Contains(extractPath + "\\" + "dinput8.dll") || files.Contains(extractPath + "\\" + "modengine.ini"))
+                {
+                    System.IO.File.Delete(this.FOLDER_PATH_DS3 + "\\" + "dinput8.dll");
+                    System.IO.File.Delete(this.FOLDER_PATH_DS3 + "\\" + "modengine.ini");
+                }
+                else
+                {
+                    System.IO.Compression.ZipFile.ExtractToDirectory(zipPath, extractPath);
+                }
+                CheckModInstall();
             }
-            else
+            catch (Exception ex)
             {
-                System.IO.Compression.ZipFile.ExtractToDirectory(zipPath, extractPath);
+
             }
-            CheckModInstall();
+
 
         }
 
@@ -98,10 +106,12 @@ namespace DS3AllinoneRandomizer
                 else
                 {
                     System.IO.Compression.ZipFile.ExtractToDirectory(zipPath, extractPath);
+                    System.IO.File.Copy(@".\pooremma\pooremma.exe", extractPath+ @"\pooremma.exe", true);
+                    System.IO.File.Copy(@".\pooremma\SoulsFormats.dll", extractPath+ @"\SoulsFormats.dll", true);
                 }
                 CheckModInstall();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
             }
@@ -150,7 +160,7 @@ namespace DS3AllinoneRandomizer
                 }
                 CheckModInstall();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
             }
@@ -159,16 +169,7 @@ namespace DS3AllinoneRandomizer
 
         private void CheckModInstall()
         {
-            if (this.EnemyRandoInstalled && IsDirectoryEmpty(this.FOLDER_PATH_DS3 + "\\" + "mod") == true)
-            {
-                lbl_ItemRandoWarning.Text = "Please reinstall Item randomizer to remove Enemy randomizer files";
-                lbl_ItemRandoWarning.ForeColor = Color.Red;
-                lbl_ItemRandoWarning.Show();
-            }
-            else
-            {
-                lbl_ItemRandoWarning.Hide();
-            }
+
             this.EnemyRandoInstalled = !IsDirectoryEmpty(this.FOLDER_PATH_DS3 + "\\" + "mod");
             //Check if mods are installed
             if (EnemyRandoInstalled)
@@ -192,12 +193,24 @@ namespace DS3AllinoneRandomizer
                 lbl_ItemRandoInstallStatus.Text = "Installed";
                 lbl_ItemRandoInstallStatus.ForeColor = Color.Green;
                 btn_ItemRandoInstall.Text = "Uninstall";
+
+                if (IsDirectoryEmpty(this.FOLDER_PATH_DS3 + "\\" + "mod") == true)
+                {
+                    lbl_ItemRandoWarning.Text = "Please reinstall Item randomizer to remove Enemy randomizer files";
+                    lbl_ItemRandoWarning.ForeColor = Color.Red;
+                    lbl_ItemRandoWarning.Show();
+                }
+                else
+                {
+                    lbl_ItemRandoWarning.Hide();
+                }
             }
             else
             {
                 lbl_ItemRandoInstallStatus.Text = "Not Installed";
                 lbl_ItemRandoInstallStatus.ForeColor = Color.Red;
                 btn_ItemRandoInstall.Text = "Install";
+                lbl_ItemRandoWarning.Hide();
             }
 
             this.ModEngineInstalled = (System.IO.File.Exists(this.FOLDER_PATH_DS3 + "\\" + "dinput8.dll") && System.IO.File.Exists(this.FOLDER_PATH_DS3 + "\\" + "modengine.ini"));
@@ -267,7 +280,7 @@ namespace DS3AllinoneRandomizer
             {
                 IsEmpty = !Directory.EnumerateFileSystemEntries(path).Any();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return true;
             }
@@ -302,7 +315,7 @@ namespace DS3AllinoneRandomizer
                     File.WriteAllText(this.FOLDER_PATH_DS3 + "\\" + "modengine.ini", text);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
             }
@@ -336,7 +349,7 @@ namespace DS3AllinoneRandomizer
                     File.WriteAllText(this.FOLDER_PATH_DS3 + "\\" + "modengine.ini", text);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
             }
@@ -359,7 +372,7 @@ namespace DS3AllinoneRandomizer
                     btn_DisableSound.Text = "Disable Sound";
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
             }
@@ -367,28 +380,11 @@ namespace DS3AllinoneRandomizer
 
         private void tsmi_Save_Click(object sender, EventArgs e)
         {
-            if (this.ModEngineInstalled && (this.EnemyRandoInstalled || this.ItemRandoInstalled))
+           
+
+            if (!ClosingCheck())
             {
                 Environment.Exit(0);
-            }
-            else
-            {
-                if (this.ModEngineInstalled == false && (this.EnemyRandoInstalled || this.ItemRandoInstalled) == false)
-                {
-                    Environment.Exit(0);
-                }
-
-                if (!this.ModEngineInstalled)
-                {
-                    MessageBox.Show("Please make sure ModEngine is installed");
-                }
-
-                if (!(this.EnemyRandoInstalled || this.ItemRandoInstalled))
-                {
-                    MessageBox.Show("Please make sure either Enemy Randomizer or Item Randomizer is installed");
-                }
-
-
             }
         }
 
@@ -420,9 +416,55 @@ namespace DS3AllinoneRandomizer
             Credits.Show();
         }
 
+        private bool ClosingCheck()
+        {
+            if (this.ModEngineInstalled && (this.EnemyRandoInstalled || this.ItemRandoInstalled))
+            {
+                return false;
+            }
+            else
+            {
+                if (this.ModEngineInstalled == false && (this.EnemyRandoInstalled || this.ItemRandoInstalled) == false)
+                {
+                    return false;
+                }
+
+                if (!this.ModEngineInstalled)
+                {
+                    MessageBox.Show("Please make sure ModEngine is installed");
+                    return true;
+                }
+
+                if (!(this.EnemyRandoInstalled || this.ItemRandoInstalled))
+                {
+                    MessageBox.Show("Please make sure either Enemy Randomizer or Item Randomizer is installed");
+                    return true;
+                }
+
+                return true;
+            }
+        }
+
         private void btn_OpenItemTracker_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start(@".\DS3_Tracker\DS3Tracker.html");
+        }
+
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = ClosingCheck();
+        }
+
+        private void tsmi_OpenGameDirectory_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start(this.FOLDER_PATH_DS3);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Cant find game directory please set location using \"Change DS3 Location\"");
+            }
         }
     }
 }

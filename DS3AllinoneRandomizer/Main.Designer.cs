@@ -44,21 +44,22 @@
             this.chkb_OnlyItemRando = new System.Windows.Forms.CheckBox();
             this.btn_DisableSound = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.tsmi_ChangeDir = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmi_Save = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsb_Credits = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.gb_ModEngine = new System.Windows.Forms.GroupBox();
             this.gb_Other = new System.Windows.Forms.GroupBox();
+            this.lbl_ItemTrackerInfo = new System.Windows.Forms.Label();
+            this.btn_OpenItemTracker = new System.Windows.Forms.Button();
             this.lbl_DisableSoundInfo = new System.Windows.Forms.Label();
             this.gb_ItemRandomizer = new System.Windows.Forms.GroupBox();
             this.lbl_ItemOnlyInfo = new System.Windows.Forms.Label();
             this.gb_EnemyRandomizer = new System.Windows.Forms.GroupBox();
             this.lbl_EnemyOnlyInfo = new System.Windows.Forms.Label();
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.tsmi_ChangeDir = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmi_OpenGameDirectory = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmi_Save = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsb_Credits = new System.Windows.Forms.ToolStripButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btn_OpenItemTracker = new System.Windows.Forms.Button();
-            this.lbl_ItemTrackerInfo = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.gb_ModEngine.SuspendLayout();
@@ -111,26 +112,26 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(67, 17);
+            this.toolStripStatusLabel1.Text = "StatusLabel";
             // 
             // lbl_EnemyRandoInstallStatus
             // 
             this.lbl_EnemyRandoInstallStatus.AutoSize = true;
             this.lbl_EnemyRandoInstallStatus.Location = new System.Drawing.Point(6, 16);
             this.lbl_EnemyRandoInstallStatus.Name = "lbl_EnemyRandoInstallStatus";
-            this.lbl_EnemyRandoInstallStatus.Size = new System.Drawing.Size(35, 13);
+            this.lbl_EnemyRandoInstallStatus.Size = new System.Drawing.Size(78, 13);
             this.lbl_EnemyRandoInstallStatus.TabIndex = 10;
-            this.lbl_EnemyRandoInstallStatus.Text = "label1";
+            this.lbl_EnemyRandoInstallStatus.Text = "[InstalledLabel]";
             // 
             // lbl_ItemRandoInstallStatus
             // 
             this.lbl_ItemRandoInstallStatus.AutoSize = true;
             this.lbl_ItemRandoInstallStatus.Location = new System.Drawing.Point(6, 16);
             this.lbl_ItemRandoInstallStatus.Name = "lbl_ItemRandoInstallStatus";
-            this.lbl_ItemRandoInstallStatus.Size = new System.Drawing.Size(35, 13);
+            this.lbl_ItemRandoInstallStatus.Size = new System.Drawing.Size(78, 13);
             this.lbl_ItemRandoInstallStatus.TabIndex = 11;
-            this.lbl_ItemRandoInstallStatus.Text = "label1";
+            this.lbl_ItemRandoInstallStatus.Text = "[InstalledLabel]";
             // 
             // btn_ItemRandoInstall
             // 
@@ -147,9 +148,9 @@
             this.lbl_ModEngineInstallStatus.AutoSize = true;
             this.lbl_ModEngineInstallStatus.Location = new System.Drawing.Point(6, 19);
             this.lbl_ModEngineInstallStatus.Name = "lbl_ModEngineInstallStatus";
-            this.lbl_ModEngineInstallStatus.Size = new System.Drawing.Size(35, 13);
+            this.lbl_ModEngineInstallStatus.Size = new System.Drawing.Size(78, 13);
             this.lbl_ModEngineInstallStatus.TabIndex = 14;
-            this.lbl_ModEngineInstallStatus.Text = "label2";
+            this.lbl_ModEngineInstallStatus.Text = "[InstalledLabel]";
             // 
             // btn_ModEngineInstall
             // 
@@ -167,7 +168,7 @@
             this.lbl_ItemRandoWarning.Name = "lbl_ItemRandoWarning";
             this.lbl_ItemRandoWarning.Size = new System.Drawing.Size(115, 54);
             this.lbl_ItemRandoWarning.TabIndex = 17;
-            this.lbl_ItemRandoWarning.Text = "label1";
+            this.lbl_ItemRandoWarning.Text = "[WarningLabel]";
             // 
             // chkb_OnlyEnemyRando
             // 
@@ -213,48 +214,12 @@
             this.toolStrip1.TabIndex = 21;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripDropDownButton1
-            // 
-            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmi_ChangeDir,
-            this.tsmi_Save});
-            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
-            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(51, 22);
-            this.toolStripDropDownButton1.Text = "Menu";
-            // 
-            // tsmi_ChangeDir
-            // 
-            this.tsmi_ChangeDir.Name = "tsmi_ChangeDir";
-            this.tsmi_ChangeDir.Size = new System.Drawing.Size(187, 22);
-            this.tsmi_ChangeDir.Text = "Change DS3 Location";
-            this.tsmi_ChangeDir.Click += new System.EventHandler(this.tsmi_ChangeDir_Click);
-            // 
-            // tsmi_Save
-            // 
-            this.tsmi_Save.Name = "tsmi_Save";
-            this.tsmi_Save.Size = new System.Drawing.Size(187, 22);
-            this.tsmi_Save.Text = "Save and Exit";
-            this.tsmi_Save.Click += new System.EventHandler(this.tsmi_Save_Click);
-            // 
-            // tsb_Credits
-            // 
-            this.tsb_Credits.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsb_Credits.Image = ((System.Drawing.Image)(resources.GetObject("tsb_Credits.Image")));
-            this.tsb_Credits.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsb_Credits.Name = "tsb_Credits";
-            this.tsb_Credits.Size = new System.Drawing.Size(48, 22);
-            this.tsb_Credits.Text = "Credits";
-            this.tsb_Credits.Click += new System.EventHandler(this.tsb_Credits_Click);
-            // 
             // toolStripLabel1
             // 
             this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(86, 22);
-            this.toolStripLabel1.Text = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(73, 22);
+            this.toolStripLabel1.Text = "VersionLabel";
             // 
             // gb_ModEngine
             // 
@@ -279,6 +244,25 @@
             this.gb_Other.TabIndex = 23;
             this.gb_Other.TabStop = false;
             this.gb_Other.Text = "Other";
+            // 
+            // lbl_ItemTrackerInfo
+            // 
+            this.lbl_ItemTrackerInfo.AutoSize = true;
+            this.lbl_ItemTrackerInfo.Location = new System.Drawing.Point(6, 108);
+            this.lbl_ItemTrackerInfo.Name = "lbl_ItemTrackerInfo";
+            this.lbl_ItemTrackerInfo.Size = new System.Drawing.Size(117, 13);
+            this.lbl_ItemTrackerInfo.TabIndex = 26;
+            this.lbl_ItemTrackerInfo.Text = "To track impotant items";
+            // 
+            // btn_OpenItemTracker
+            // 
+            this.btn_OpenItemTracker.Location = new System.Drawing.Point(6, 124);
+            this.btn_OpenItemTracker.Name = "btn_OpenItemTracker";
+            this.btn_OpenItemTracker.Size = new System.Drawing.Size(108, 23);
+            this.btn_OpenItemTracker.TabIndex = 25;
+            this.btn_OpenItemTracker.Text = "Item Tracker";
+            this.btn_OpenItemTracker.UseVisualStyleBackColor = true;
+            this.btn_OpenItemTracker.Click += new System.EventHandler(this.btn_OpenItemTracker_Click);
             // 
             // lbl_DisableSoundInfo
             // 
@@ -334,34 +318,59 @@
             this.lbl_EnemyOnlyInfo.TabIndex = 19;
             this.lbl_EnemyOnlyInfo.Text = "Check this if you want to randomize only Enemies";
             // 
+            // toolStripDropDownButton1
+            // 
+            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmi_ChangeDir,
+            this.tsmi_OpenGameDirectory,
+            this.tsmi_Save});
+            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(51, 22);
+            this.toolStripDropDownButton1.Text = "Menu";
+            // 
+            // tsmi_ChangeDir
+            // 
+            this.tsmi_ChangeDir.Name = "tsmi_ChangeDir";
+            this.tsmi_ChangeDir.Size = new System.Drawing.Size(187, 22);
+            this.tsmi_ChangeDir.Text = "Change DS3 Location";
+            this.tsmi_ChangeDir.Click += new System.EventHandler(this.tsmi_ChangeDir_Click);
+            // 
+            // tsmi_OpenGameDirectory
+            // 
+            this.tsmi_OpenGameDirectory.Name = "tsmi_OpenGameDirectory";
+            this.tsmi_OpenGameDirectory.Size = new System.Drawing.Size(187, 22);
+            this.tsmi_OpenGameDirectory.Text = "Open Game Location";
+            this.tsmi_OpenGameDirectory.Click += new System.EventHandler(this.tsmi_OpenGameDirectory_Click);
+            // 
+            // tsmi_Save
+            // 
+            this.tsmi_Save.Name = "tsmi_Save";
+            this.tsmi_Save.Size = new System.Drawing.Size(187, 22);
+            this.tsmi_Save.Text = "Save and Exit";
+            this.tsmi_Save.Click += new System.EventHandler(this.tsmi_Save_Click);
+            // 
+            // tsb_Credits
+            // 
+            this.tsb_Credits.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsb_Credits.Image = ((System.Drawing.Image)(resources.GetObject("tsb_Credits.Image")));
+            this.tsb_Credits.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsb_Credits.Name = "tsb_Credits";
+            this.tsb_Credits.Size = new System.Drawing.Size(48, 22);
+            this.tsb_Credits.Text = "Credits";
+            this.tsb_Credits.Click += new System.EventHandler(this.tsb_Credits_Click);
+            // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Image = global::DS3AllinoneRandomizer.Properties.Resources.solaire;
             this.pictureBox1.Location = new System.Drawing.Point(0, 231);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(182, 356);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 26;
             this.pictureBox1.TabStop = false;
-            // 
-            // btn_OpenItemTracker
-            // 
-            this.btn_OpenItemTracker.Location = new System.Drawing.Point(6, 124);
-            this.btn_OpenItemTracker.Name = "btn_OpenItemTracker";
-            this.btn_OpenItemTracker.Size = new System.Drawing.Size(108, 23);
-            this.btn_OpenItemTracker.TabIndex = 25;
-            this.btn_OpenItemTracker.Text = "Item Tracker";
-            this.btn_OpenItemTracker.UseVisualStyleBackColor = true;
-            this.btn_OpenItemTracker.Click += new System.EventHandler(this.btn_OpenItemTracker_Click);
-            // 
-            // lbl_ItemTrackerInfo
-            // 
-            this.lbl_ItemTrackerInfo.AutoSize = true;
-            this.lbl_ItemTrackerInfo.Location = new System.Drawing.Point(6, 108);
-            this.lbl_ItemTrackerInfo.Name = "lbl_ItemTrackerInfo";
-            this.lbl_ItemTrackerInfo.Size = new System.Drawing.Size(117, 13);
-            this.lbl_ItemTrackerInfo.TabIndex = 26;
-            this.lbl_ItemTrackerInfo.Text = "To track impotant items";
             // 
             // Main
             // 
@@ -381,6 +390,7 @@
             this.MaximizeBox = false;
             this.Name = "Main";
             this.Text = "Dark Souls 3 : All-in-One Randomizer";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
@@ -431,6 +441,7 @@
         private System.Windows.Forms.ToolStripButton tsb_Credits;
         private System.Windows.Forms.Label lbl_ItemTrackerInfo;
         private System.Windows.Forms.Button btn_OpenItemTracker;
+        private System.Windows.Forms.ToolStripMenuItem tsmi_OpenGameDirectory;
     }
 }
 
