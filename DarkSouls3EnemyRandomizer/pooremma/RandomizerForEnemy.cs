@@ -21,7 +21,7 @@ namespace pooremma
 
 		static RandomizerForEnemy()
 		{
-			RandomizerForEnemy.FILE_NAME = new string[] { "EnemyData\\NormalEnemyName.txt", "EnemyData\\BossName.txt", "EnemyData\\AllEnemyName.txt" };
+			RandomizerForEnemy.FILE_NAME = new string[] { "EnemyData\\NormalEnemyName.txt", "EnemyData\\BossName.txt", "EnemyData\\AllEnemyName.txt", "EnemyData\\EasyEnemyName.txt", "EnemyData\\EasyBossName.txt" };
 			RandomizerForEnemy.LIST_FILE_RANDOM_DS3 = new string[] { "files\\mapstudio\\m30_00_00_00.msb.dcx", "files\\mapstudio\\m30_01_00_00.msb.dcx", "files\\mapstudio\\m31_00_00_00.msb.dcx", "files\\mapstudio\\m32_00_00_00.msb.dcx", "files\\mapstudio\\m33_00_00_00.msb.dcx", "files\\mapstudio\\m34_01_00_00.msb.dcx", "files\\mapstudio\\m35_00_00_00.msb.dcx", "files\\mapstudio\\m37_00_00_00.msb.dcx", "files\\mapstudio\\m38_00_00_00.msb.dcx", "files\\mapstudio\\m39_00_00_00.msb.dcx", "files\\mapstudio\\m40_00_00_00.msb.dcx", "files\\mapstudio\\m41_00_00_00.msb.dcx", "files\\mapstudio\\m45_00_00_00.msb.dcx", "files\\mapstudio\\m50_00_00_00.msb.dcx", "files\\mapstudio\\m51_00_00_00.msb.dcx", "files\\mapstudio\\m51_01_00_00.msb.dcx" };
 			RandomizerForEnemy.EVENT_DS3 = new string[] { "files\\event\\m30_00_00_00.emevd.dcx", "files\\event\\m30_01_00_00.emevd.dcx", "files\\event\\m31_00_00_00.emevd.dcx", "files\\event\\m32_00_00_00.emevd.dcx", "files\\event\\m33_00_00_00.emevd.dcx", "files\\event\\m34_01_00_00.emevd.dcx", "files\\event\\m35_00_00_00.emevd.dcx", "files\\event\\m37_00_00_00.emevd.dcx", "files\\event\\m38_00_00_00.emevd.dcx", "files\\event\\m39_00_00_00.emevd.dcx", "files\\event\\m40_00_00_00.emevd.dcx", "files\\event\\m41_00_00_00.emevd.dcx", "files\\event\\m45_00_00_00.emevd.dcx", "files\\event\\m50_00_00_00.emevd.dcx", "files\\event\\m51_00_00_00.emevd.dcx", "files\\event\\m51_01_00_00.emevd.dcx" };
 			RandomizerForEnemy.EVENT_WRITE = new string[] { "event\\m30_00_00_00.emevd.dcx", "event\\m30_01_00_00.emevd.dcx", "event\\m31_00_00_00.emevd.dcx", "event\\m32_00_00_00.emevd.dcx", "event\\m33_00_00_00.emevd.dcx", "event\\m34_01_00_00.emevd.dcx", "event\\m35_00_00_00.emevd.dcx", "event\\m37_00_00_00.emevd.dcx", "event\\m38_00_00_00.emevd.dcx", "event\\m39_00_00_00.emevd.dcx", "event\\m40_00_00_00.emevd.dcx", "event\\m41_00_00_00.emevd.dcx", "event\\m45_00_00_00.emevd.dcx", "event\\m50_00_00_00.emevd.dcx", "event\\m51_00_00_00.emevd.dcx", "event\\m51_01_00_00.emevd.dcx" };
@@ -33,13 +33,16 @@ namespace pooremma
 		{
 		}
 
-		public static void Randomwriter(int choiceA, int choiceB, int enemyBossChance, int bossBossChance)
+		public static void Randomwriter(int choiceA, int choiceB, int enemyBossChance, int bossBossChance, int easyWall)
 		{
 			int num;
 			List<RandomizerForEnemy.EnemyData> enemyDatas = new List<RandomizerForEnemy.EnemyData>();
 			List<RandomizerForEnemy.EnemyData> enemyDatas1 = new List<RandomizerForEnemy.EnemyData>();
 			List<RandomizerForEnemy.EnemyData> enemyDatas2 = new List<RandomizerForEnemy.EnemyData>();
+			List<RandomizerForEnemy.EnemyData> easyEnemyDatas = new List<RandomizerForEnemy.EnemyData>();
+			List<RandomizerForEnemy.EnemyData> easyBossDatas = new List<RandomizerForEnemy.EnemyData>();
 			List<String> bossModelIds = new List<string>();
+			List<String> easyWallEnemies = new List<string>() { "c1250", "c2021", "c1430" };
 			RandomizerForEnemy.EnemyData enemyDatum = null;
 			FileStream fileStream = new FileStream(RandomizerForEnemy.FILE_NAME[0], FileMode.Open, FileAccess.Read);
 			StreamReader streamReader = new StreamReader(fileStream);
@@ -110,6 +113,52 @@ namespace pooremma
 			}
 			streamReader2.Close();
 			fileStream2.Close();
+			FileStream fileStream3 = new FileStream(RandomizerForEnemy.FILE_NAME[3], FileMode.Open, FileAccess.Read);
+			StreamReader streamReader3 = new StreamReader(fileStream3);
+			while (true)
+			{
+				string str4 = streamReader3.ReadLine();
+				string str5 = str4;
+				if (str4 == null)
+				{
+					break;
+				}
+				string[] strArrays3 = str5.Split(new char[] { '\t' });
+				enemyDatum = new RandomizerForEnemy.EnemyData()
+				{
+					EnemyName = strArrays3[0],
+					EventEntityID = Convert.ToInt32(strArrays3[1]),
+					ModelName = strArrays3[2],
+					NPCParamID = Convert.ToInt32(strArrays3[3]),
+					ThinkParamID = Convert.ToInt32(strArrays3[4])
+				};
+				easyEnemyDatas.Add(enemyDatum);
+			}
+			streamReader3.Close();
+			fileStream3.Close();
+			FileStream fileStream4 = new FileStream(RandomizerForEnemy.FILE_NAME[4], FileMode.Open, FileAccess.Read);
+			StreamReader streamReader4 = new StreamReader(fileStream4);
+			while (true)
+			{
+				string str4 = streamReader4.ReadLine();
+				string str5 = str4;
+				if (str4 == null)
+				{
+					break;
+				}
+				string[] strArrays4 = str5.Split(new char[] { '\t' });
+				enemyDatum = new RandomizerForEnemy.EnemyData()
+				{
+					EnemyName = strArrays4[0],
+					EventEntityID = Convert.ToInt32(strArrays4[1]),
+					ModelName = strArrays4[2],
+					NPCParamID = Convert.ToInt32(strArrays4[3]),
+					ThinkParamID = Convert.ToInt32(strArrays4[4])
+				};
+				easyBossDatas.Add(enemyDatum);
+			}
+			streamReader4.Close();
+			fileStream4.Close();
 			for (int i = 0; i < (int)RandomizerForEnemy.LIST_FILE_RANDOM_DS3.Length; i++)
 			{
 				MSB3 mSB3 = SoulsFile<MSB3>.Read(RandomizerForEnemy.LIST_FILE_RANDOM_DS3[i]);
@@ -273,17 +322,25 @@ namespace pooremma
 							//	}
 							//}
 
-
-							// if current enemy is a boss 
 							if (bossModelIds.Contains(enemies[l].ModelName))
 							{
 								// If bosses can only be bosses make enemy a random boss 
 								if (choiceB == 1)
 								{
-									int randomBossId = random.Next(0, enemyDatas1.Count);
-									enemies[l].ModelName = enemyDatas1[randomBossId].ModelName;
-									enemies[l].NPCParamID = enemyDatas1[randomBossId].NPCParamID;
-									enemies[l].ThinkParamID = enemyDatas1[randomBossId].ThinkParamID;
+									if (easyWall == 1 && enemies[l].ModelName == "c5110")
+									{
+										int randomBossId = random.Next(0, easyBossDatas.Count);
+										enemies[l].ModelName = easyBossDatas[randomBossId].ModelName;
+										enemies[l].NPCParamID = easyBossDatas[randomBossId].NPCParamID;
+										enemies[l].ThinkParamID = easyBossDatas[randomBossId].ThinkParamID;
+									}
+									else
+									{
+										int randomBossId = random.Next(0, enemyDatas1.Count);
+										enemies[l].ModelName = enemyDatas1[randomBossId].ModelName;
+										enemies[l].NPCParamID = enemyDatas1[randomBossId].NPCParamID;
+										enemies[l].ThinkParamID = enemyDatas1[randomBossId].ThinkParamID;
+									}
 								}
 								else // Make boss either an enemy or a boss (very low chance for a boss)
 								{
@@ -296,10 +353,20 @@ namespace pooremma
 									}
 									else // make current enemy any enemy
 									{
-										int randomEnemyId = random.Next(0, enemyDatas2.Count);
-										enemies[l].ModelName = enemyDatas2[randomEnemyId].ModelName;
-										enemies[l].NPCParamID = enemyDatas2[randomEnemyId].NPCParamID;
-										enemies[l].ThinkParamID = enemyDatas2[randomEnemyId].ThinkParamID;
+										if (easyWall == 1 && easyWallEnemies.Contains(enemies[l].ModelName))
+										{
+											int randomEnemyId = random.Next(0, easyEnemyDatas.Count);
+											enemies[l].ModelName = easyEnemyDatas[randomEnemyId].ModelName;
+											enemies[l].NPCParamID = easyEnemyDatas[randomEnemyId].NPCParamID;
+											enemies[l].ThinkParamID = easyEnemyDatas[randomEnemyId].ThinkParamID;
+										}
+										else
+										{
+											int randomEnemyId = random.Next(0, enemyDatas2.Count);
+											enemies[l].ModelName = enemyDatas2[randomEnemyId].ModelName;
+											enemies[l].NPCParamID = enemyDatas2[randomEnemyId].NPCParamID;
+											enemies[l].ThinkParamID = enemyDatas2[randomEnemyId].ThinkParamID;
+										}
 									}
 								}
 							}
