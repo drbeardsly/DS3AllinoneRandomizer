@@ -36,12 +36,13 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.lbl_Thanks = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(71, 79);
+            this.label1.Location = new System.Drawing.Point(66, 79);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(194, 13);
             this.label1.TabIndex = 0;
@@ -50,7 +51,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(79, 142);
+            this.label2.Location = new System.Drawing.Point(74, 138);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(178, 13);
             this.label2.TabIndex = 1;
@@ -59,7 +60,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(104, 205);
+            this.label3.Location = new System.Drawing.Point(99, 197);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(128, 13);
             this.label3.TabIndex = 2;
@@ -68,7 +69,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(89, 268);
+            this.label4.Location = new System.Drawing.Point(84, 256);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(158, 13);
             this.label4.TabIndex = 3;
@@ -77,7 +78,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(32, 331);
+            this.label5.Location = new System.Drawing.Point(27, 315);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(272, 13);
             this.label5.TabIndex = 4;
@@ -86,7 +87,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 394);
+            this.label6.Location = new System.Drawing.Point(7, 374);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(313, 13);
             this.label6.TabIndex = 5;
@@ -102,11 +103,21 @@
             this.lbl_Thanks.TabIndex = 6;
             this.lbl_Thanks.Text = "Thanks";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(95, 433);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(137, 13);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "Xylozi : For the Cinders mod";
+            // 
             // Credits
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(343, 450);
+            this.ClientSize = new System.Drawing.Size(343, 545);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.lbl_Thanks);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -131,5 +142,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lbl_Thanks;
+        private System.Windows.Forms.Label label7;
     }
 }

@@ -1,12 +1,17 @@
-﻿using System;
+﻿using SharpCompress.Archives;
+using SharpCompress.Common;
+using SharpCompress.Readers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -19,7 +24,10 @@ namespace DS3AllinoneRandomizer
         private bool EnemyRandoInstalled { get; set; }
         private bool ItemRandoInstalled { get; set; }
         private bool ModEngineInstalled { get; set; }
+        private bool CindersInstalled { get; set; }
+        private bool Savebackedup { get; set; }
 
+        public Progress<ZipProgress> _progress;
         public Main()
         {
             InitializeComponent();
@@ -38,6 +46,24 @@ namespace DS3AllinoneRandomizer
             CheckModInstall();
             chkb_OnlyEnemyRando.Checked = Properties.Settings.Default.OnlyEnemyRando;
             chkb_OnlyItemRando.Checked = Properties.Settings.Default.OnlyItemRando;
+
+            _progress = new Progress<ZipProgress>();
+            _progress.ProgressChanged += Report;
+        }
+
+        private void Report(object sender, ZipProgress zipProgress)
+        {
+            //Use zipProgress here to update the UI on the progress.
+            pb_Cinders.Value = zipProgress.Processed;
+            pb_Cinders.Maximum = zipProgress.Total;
+            pb_Cinders.Refresh();
+
+            if (zipProgress.Processed == zipProgress.Total)
+            {
+                pb_Cinders.Value = 0;
+                pb_Cinders.Hide();
+                CheckModInstall();
+            }
         }
 
         private void btn_ModEngineInstall_Click(object sender, EventArgs e)
@@ -229,6 +255,46 @@ namespace DS3AllinoneRandomizer
                 btn_ModEngineInstall.Text = "Install";
             }
 
+            this.CindersInstalled = !IsDirectoryEmpty(this.FOLDER_PATH_DS3 + "\\" + "Cinders");
+            //Check if mods are installed
+            if (CindersInstalled)
+            {
+
+                lbl_CindersInstalled.Text = "Installed";
+                lbl_CindersInstalled.ForeColor = Color.Green;
+                btn_InstallCinders.Text = "Uninstall";
+            }
+            else
+            {
+                lbl_CindersInstalled.Text = "Not Installed";
+                lbl_CindersInstalled.ForeColor = Color.Red;
+                btn_InstallCinders.Text = "Install";
+            }
+
+            string SaveFilePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\" + @"DarkSoulsIII";
+            var Directories = System.IO.Directory.GetDirectories(SaveFilePath);
+
+            var SaveDir = Directories[0];
+            if (System.IO.Directory.Exists(SaveDir + "\\" + "backup"))
+            {
+                if (System.IO.Directory.GetFiles(SaveDir + "\\" + "backup").Length > 0)
+                {
+                    this.Savebackedup = true;
+                    btn_backupSaves.Text = "Restore old save files";
+                }
+                else
+                {
+                    this.Savebackedup = false;
+                    btn_InstallSave.Text = "Install fresh save";
+                    btn_backupSaves.Text = "Backup save files";
+                }
+            }
+            else
+            {
+                this.Savebackedup = false;
+                //btn_backupSaves.Text = "Backup save files";
+            }
+
 
         }
 
@@ -418,13 +484,13 @@ namespace DS3AllinoneRandomizer
 
         private bool ClosingCheck()
         {
-            if (this.ModEngineInstalled && (this.EnemyRandoInstalled || this.ItemRandoInstalled))
+            if (this.ModEngineInstalled && (this.EnemyRandoInstalled || this.ItemRandoInstalled || this.CindersInstalled))
             {
                 return false;
             }
             else
             {
-                if (this.ModEngineInstalled == false && (this.EnemyRandoInstalled || this.ItemRandoInstalled) == false)
+                if (this.ModEngineInstalled == false && (this.EnemyRandoInstalled || this.ItemRandoInstalled || this.CindersInstalled) == false)
                 {
                     return false;
                 }
@@ -435,9 +501,9 @@ namespace DS3AllinoneRandomizer
                     return true;
                 }
 
-                if (!(this.EnemyRandoInstalled || this.ItemRandoInstalled))
+                if (!(this.EnemyRandoInstalled || this.ItemRandoInstalled || this.CindersInstalled))
                 {
-                    MessageBox.Show("Please make sure either Enemy Randomizer or Item Randomizer is installed");
+                    MessageBox.Show("Please make sure there is atleast one mod installed");
                     return true;
                 }
 
@@ -464,6 +530,304 @@ namespace DS3AllinoneRandomizer
             catch (Exception ex)
             {
                 MessageBox.Show("Cant find game directory please set location using \"Change DS3 Location\"");
+            }
+        }
+
+        private void btn_InstallCinders_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (!this.Savebackedup)
+                {
+                    MessageBox.Show("Please backup save files before installing cinders");
+                    return;
+                }
+                if (!this.ModEngineInstalled)
+                {
+                    MessageBox.Show("Please make sure ModEngine is installed before installing Cinders");
+                    return;
+                }
+                var Files = System.IO.Directory.GetFiles(@".\Zips");
+                var CindersFileFound = Files.Any(s => s.ToLower().Contains("cinders"));
+
+                string stringToCheck = "cinders";
+                var CindersFileName = "";
+                foreach (string x in Files)
+                {
+                    if (x.ToLower().Contains(stringToCheck))
+                    {
+                        CindersFileName = x;
+                        break;
+                    }
+                }
+                
+                if (!CindersFileFound)
+                {
+                    MessageBox.Show("Please Copy Cinders zip file to the Zips folder");
+                    return;
+                }
+                if (this.EnemyRandoInstalled)
+                {
+                    string EnemyRandoInstalledPath = this.FOLDER_PATH_DS3 + @"\mod";
+                    if (System.IO.Directory.Exists(EnemyRandoInstalledPath))
+                    {
+                        System.IO.Directory.Delete(EnemyRandoInstalledPath, true);
+                    }
+                }
+                if (this.ItemRandoInstalled)
+                {
+                    string ItemRandoInstalledPath = this.FOLDER_PATH_DS3 + @"\randomizer";
+                    if (System.IO.Directory.Exists(ItemRandoInstalledPath))
+                    {
+                        System.IO.Directory.Delete(ItemRandoInstalledPath, true);
+                    }
+                }
+                string text = File.ReadAllText(this.FOLDER_PATH_DS3 + "\\" + "modengine.ini");
+                string zipPath = CindersFileName;//@".\Zips\Cinders.zip";
+                string extractPath = this.FOLDER_PATH_DS3;
+                if (System.IO.Directory.Exists(extractPath + @"\Cinders"))
+                {
+                    System.IO.Directory.Delete(extractPath + @"\Cinders", true);
+                    text = text.Replace(@"loadLooseParams=1", @"loadLooseParams=0");
+                    CheckModInstall();
+                }
+                else
+                {
+                    string SaveFilePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"/DarkSoulsIII";
+                    string SaveFilezipPath = @".\Zips\Save.zip";
+                    if (System.IO.Directory.Exists(SaveFilePath))
+                    {
+                        System.IO.Compression.ZipFile.ExtractToDirectory(SaveFilezipPath, SaveFilePath);
+                    }
+
+                    //Stream zipReadingStream = System.IO.File.OpenRead(zipPath);
+                    //ZipArchive zip = new ZipArchive(zipReadingStream);
+                    pb_Cinders.Show();
+                    lbl_CindersExtractText.Show();
+                    lbl_CindersExtractText.Text = "Installing Cinders Please wait..";
+                    //System.IO.Compression.ZipFile.ExtractToDirectory(zipPath, extractPath);
+                   
+                    Task.Run(() => { BeginDecompression(zipPath, extractPath);  });
+                }
+
+               
+                text = text.Replace(@"\mod", @"\Cinders");
+                text = text.Replace(@"\randomizer", @"\Cinders");
+
+                text = text.Replace(@"loadLooseParams=0", @"loadLooseParams=1");
+                File.WriteAllText(this.FOLDER_PATH_DS3 + "\\" + "modengine.ini", text);
+
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Could not install cinders");
+            }
+        }
+
+        public static double Percentage { get; set; }
+
+        public static long totalSize { get; set; }
+
+        public static long completed { get; set; }
+
+        public void BeginDecompression(string filePath, string extractPath)
+        {
+            try
+            {
+
+                Directory.CreateDirectory(extractPath);
+                IArchive archive = ArchiveFactory.Open(filePath);
+
+                // Calculate the total extraction size.
+                totalSize = archive.TotalUncompressSize;
+                completed = 0;
+                if (filePath.Contains(".7z"))
+                {
+                    var reader = archive.ExtractAllEntries();
+                    while (reader.MoveToNextEntry())
+                    {
+                        if (!reader.Entry.IsDirectory)
+                        {
+                            reader.WriteEntryToDirectory(extractPath, new ExtractionOptions() { ExtractFullPath = true, Overwrite = true });
+                            completed += reader.Entry.Size;
+                            Percentage = ((double)completed / (double)totalSize) * 100;
+                            pb_Cinders.Invoke(new MethodInvoker(delegate { pb_Cinders.Value = Convert.ToInt32(Percentage); }));
+                            pb_Cinders.Invoke(new MethodInvoker(delegate { pb_Cinders.Refresh(); }));
+                        }
+                       
+                    }
+                }
+                else
+                {
+                    //Console.WriteLine(totalSize);
+                    foreach (IArchiveEntry entry in archive.Entries.Where(entry => !entry.IsDirectory))
+                    {
+                        //archive.CompressedBytesRead += Archive_CompressedBytesRead;
+                        entry.WriteToDirectory(extractPath, new ExtractionOptions()
+                        {
+                            ExtractFullPath = true,
+                            Overwrite = true
+                        });
+                        completed += entry.Size;
+                        Percentage = ((double)completed / (double)totalSize) * 100;
+                        pb_Cinders.Invoke(new MethodInvoker(delegate { pb_Cinders.Value = Convert.ToInt32(Percentage); }));
+                        pb_Cinders.Invoke(new MethodInvoker(delegate { pb_Cinders.Refresh(); }));
+                    }
+
+
+                }
+
+                if (Percentage >= 100)
+                {
+                    pb_Cinders.Invoke(new MethodInvoker(delegate { pb_Cinders.Hide(); }));
+                    lbl_CindersExtractText.Invoke(new MethodInvoker(delegate { lbl_CindersExtractText.Hide(); }));
+                    Invoke(new MethodInvoker(delegate { CheckModInstall(); }));
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        public void Archive_CompressedBytesRead(object sender, CompressedBytesReadEventArgs e)
+        {
+            Percentage = ((double)e.CompressedBytesRead / (double)totalSize) * 100;
+        }
+
+        private void btn_PlayDarksouls3_Click(object sender, EventArgs e)
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.CreateNoWindow = true;
+            startInfo.UseShellExecute = false;
+            startInfo.FileName = this.FOLDER_PATH_DS3 + @"\DarkSoulsIII.exe";
+            startInfo.WindowStyle = ProcessWindowStyle.Normal;
+            startInfo.WorkingDirectory = this.FOLDER_PATH_DS3;
+
+            try
+            {
+                using (Process exeProcess = Process.Start(startInfo))
+                {
+                    exeProcess.WaitForExit();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Could not launch Darksouls 3");
+            }
+        }
+
+        private void openSaveLocationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string SaveFilePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\" + @"DarkSoulsIII";
+            try
+            {
+               
+                Process.Start(SaveFilePath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Cant find save directory : "+ SaveFilePath);
+            }
+        }
+
+        private void btn_InstallSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string SaveFilePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\" + @"DarkSoulsIII";
+                var Directories = System.IO.Directory.GetDirectories(SaveFilePath);
+                var Files = System.IO.Directory.GetFiles(Directories[0]);
+                if (!this.Savebackedup)
+                {
+                    MessageBox.Show("Please backup save files before installing fresh save");
+                    return;
+                }
+
+                var SaveDir = Directories[0];
+
+                string SaveFilezipPath = @".\Zips\Save.zip";
+                System.IO.File.Delete(SaveDir + "\\" + "DS30000.sl2");
+                System.IO.Compression.ZipFile.ExtractToDirectory(SaveFilezipPath, SaveDir);
+                btn_InstallSave.Text = "Fresh save installed";
+                //if (!System.IO.File.Exists(SaveDir + "\\" + "DS30000.sl2"))
+                //{
+
+                //    System.IO.Compression.ZipFile.ExtractToDirectory(SaveFilezipPath, SaveDir);
+                //    btn_InstallSave.Text = "Fresh save installed";
+                //}
+                //else
+                //{
+                //    System.IO.File.Delete(SaveDir + "\\" + "DS30000.sl2");
+                //    btn_InstallSave.Text = "Install fresh save file";
+                //}
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Could not install or restore save files");
+            }
+
+        }
+
+        private void btn_backupSaves_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string SaveFilePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\" + @"DarkSoulsIII";
+                var Directories = System.IO.Directory.GetDirectories(SaveFilePath);
+                var Files = System.IO.Directory.GetFiles(Directories[0]);
+                var SaveDir = Directories[0];
+
+                if (!System.IO.Directory.Exists(SaveDir + "\\" + "backup"))
+                {
+
+                    System.IO.Directory.CreateDirectory(Path.Combine(SaveDir + "\\", "backup"));
+
+                    foreach (var file in Files)
+                    {
+                        FileInfo fi = new FileInfo(file);
+                        System.IO.File.Move(file, Path.Combine(SaveDir + "\\", "backup") + "\\" + fi.Name);
+                    }
+                    btn_InstallSave.Text = "Install fresh save";
+                    btn_backupSaves.Text = "Restore backup saves";
+                    this.Savebackedup = true;
+                }
+                else
+                {
+                    this.Savebackedup = false;
+                    var BackupFiles = System.IO.Directory.GetFiles(SaveDir + "\\" + "backup");
+                    System.IO.File.Delete(SaveDir + "\\" + "DS30000.sl2");
+                    foreach (var file in BackupFiles)
+                    {
+                        FileInfo fi = new FileInfo(file);
+                        System.IO.File.Move(file, SaveDir + "\\" + fi.Name);
+                    }
+                    System.IO.Directory.Delete(Path.Combine(SaveDir + "\\", "backup"));
+                    btn_backupSaves.Text = "Backup save files";
+                    btn_InstallSave.Text = "Install fresh save";
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Could not install or restore save files");
+            }
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                Process.Start(@".\Zips");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Cant find zips directory ");
             }
         }
     }

@@ -247,7 +247,7 @@ namespace pooremma
             // Force the ToolTip text to be displayed whether or not the form is active.
             toolTip1.ShowAlways = true;
             toolTip1.SetToolTip(this.easyWall, "Iudex Gundry becomes an easy boss/enemy and MOST enemies in cemetary of ash become easy (not all) [BETA]");
-            this.pictureBox1.Image = Image.FromFile("E:\\Program Files (x86)\\Steam\\steamapps\\common\\DARK SOULS III\\Game\\mod\\files\\picture\\ds3randobanner.png");
+            //this.pictureBox1.Image = Image.FromFile("E:\\Program Files (x86)\\Steam\\steamapps\\common\\DARK SOULS III\\Game\\mod\\files\\picture\\ds3randobanner.png");
 		}
 	}
 }
