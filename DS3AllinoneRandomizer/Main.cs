@@ -705,18 +705,15 @@ namespace DS3AllinoneRandomizer
             startInfo.UseShellExecute = false;
             startInfo.FileName = this.FOLDER_PATH_DS3 + @"\DarkSoulsIII.exe";
             startInfo.WindowStyle = ProcessWindowStyle.Normal;
-            startInfo.WorkingDirectory = this.FOLDER_PATH_DS3;
+            startInfo.WorkingDirectory = this.FOLDER_PATH_DS3 + "\\";
 
             try
             {
-                using (Process exeProcess = Process.Start(startInfo))
-                {
-                    exeProcess.WaitForExit();
-                }
+                Process.Start(startInfo);
             }
-            catch
+            catch(Exception ex)
             {
-                MessageBox.Show("Could not launch Darksouls 3");
+                MessageBox.Show("Could not launch Darksouls 3 please run the application as admin");
             }
         }
 
